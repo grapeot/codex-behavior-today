@@ -16,4 +16,6 @@
 
 ## Deployment
 
-`master` 是唯一主分支。GitHub Actions 从 `master` 上传 committed `site/` 目录并部署 GitHub Pages。Actions 不拥有 OAuth credential，也不发起 API 请求。
+`master` 是唯一主分支，受 branch protection 保护。GitHub Actions 从 `master` 上传 committed `site/` 目录并部署 GitHub Pages。Actions 不拥有 OAuth credential，也不发起 API 请求。
+
+日更在本机生成 data/site 后，创建一个 date-scoped branch、push、开 PR 并 merge。这样公开 Git 历史保留每日数据变更的 PR 审计轨迹，同时 scheduler 不需要也不能直接写入保护分支。

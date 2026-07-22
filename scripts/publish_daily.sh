@@ -18,7 +18,22 @@ if [[ "${1:-}" == "--check" ]]; then
   exit 0
 fi
 
+git fetch origin master
+git checkout master
+git pull --ff-only origin master
+RUN_DATE="$(date +%F)"
+BRANCH="data/codex-behavior-${RUN_DATE}"
+git checkout -B "$BRANCH" origin/master
+
 ./.venv/bin/python -m codex_behavior_today run
-git add data/daily site docs/working.md
-git diff --cached --quiet || git commit -m "data: update daily Codex behavior"
-git push origin master
+git add data/daily site
+if git diff --cached --quiet; then
+  git checkout master
+  exit 0
+fi
+git commit -m "data: update daily Codex behavior"
+git push --set-upstream origin "$BRANCH"
+PR_URL="$(gh pr create --base master --head "$BRANCH" --title "data: update daily Codex behavior" --body "Automated aggregate-only daily endpoint behavior update.")"
+gh pr merge "$PR_URL" --merge --delete-branch
+git checkout master
+git pull --ff-only origin master

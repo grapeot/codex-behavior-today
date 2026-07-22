@@ -30,10 +30,33 @@ Run one daily sample and build the site:
 .venv/bin/python -m codex_behavior_today run
 ```
 
+This project does not distribute credentials or a shared endpoint. To reproduce a live run, first authorize an owner-controlled local ChatGPT/Codex OAuth CLI with your own subscription, then point `CODEX_BEHAVIOR_OAUTH_CLI` at that executable. The resulting data describe the endpoint behavior available to that account and route, not a universal property of the named model.
+
 Build the static site from existing public aggregates only:
 
 ```bash
 .venv/bin/python -m codex_behavior_today build-site
+```
+
+## Reproduce The Public Metrics
+
+No credential is required to reproduce the public dashboard from committed aggregate data:
+
+```bash
+.venv/bin/python -m codex_behavior_today build-site
+.venv/bin/python -m pytest -v
+```
+
+`data/daily/` is the public source of truth. Each file contains only per-cell answer counts, sample totals, latency summaries, and drift metrics. `site/data/history.json` is generated from those files.
+
+## Run It Daily
+
+The repository's local `scripts/publish_daily.sh` is intentionally designed for an owner-controlled scheduler. It loads ignored local configuration, samples the endpoint, generates aggregate data and the static site, then creates a branch and pull request for that daily update. Once branch protection is enabled, it merges the PR rather than pushing directly to `master`.
+
+Run its safe, no-network validation mode with:
+
+```bash
+scripts/publish_daily.sh --check
 ```
 
 ## Privacy
