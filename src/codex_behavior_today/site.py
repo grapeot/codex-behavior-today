@@ -1,0 +1,22 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+def build_site(days: list[dict], site_dir: Path) -> None:
+    site_dir.mkdir(parents=True, exist_ok=True)
+    (site_dir / "data").mkdir(exist_ok=True)
+    (site_dir / "data" / "history.json").write_text(json.dumps(days, ensure_ascii=False, indent=2) + "\n")
+    (site_dir / "index.html").write_text(_html())
+
+
+def _html() -> str:
+    return """<!doctype html>
+<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Did Codex Behave Differently Today?</title>
+<style>
+:root{--ink:#17221b;--muted:#66736a;--paper:#f4f1e8;--card:#fffdf7;--line:#d5d2c7;--accent:#177e62;--warn:#b35f16}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,sans-serif}.wrap{max-width:920px;margin:auto;padding:42px 20px 72px}h1{font:700 clamp(2.2rem,6vw,4.6rem)/.96 Georgia,serif;letter-spacing:-.055em;max-width:760px;margin:0 0 18px}.lede{font-size:1.18rem;max-width:680px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0}.card{background:var(--card);border:1px solid var(--line);padding:18px;min-height:125px}.label{text-transform:uppercase;letter-spacing:.09em;font-size:.72rem;color:var(--muted)}.value{font:700 1.6rem/1.2 Georgia,serif;margin-top:12px}.note{font-size:.88rem;color:var(--muted);margin-top:8px}section{margin-top:42px}h2{font:700 1.5rem Georgia,serif;margin-bottom:10px}.bar-row{display:grid;grid-template-columns:150px 1fr 56px;gap:10px;align-items:center;margin:9px 0}.bar{height:12px;background:#dedbd1}.fill{height:100%;background:var(--accent)}.warn{color:var(--warn)}footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.85rem}@media(max-width:640px){.grid{grid-template-columns:1fr}.bar-row{grid-template-columns:100px 1fr 46px}}
+</style></head><body><main class=\"wrap\"><p class=\"label\">Daily endpoint behavior monitor</p><h1>Did Codex behave differently today?</h1><p class=\"lede\">A fixed set of short prompts, sampled daily through one Codex subscription path. This shows behavioral drift, not model identity or capability.</p><div id=\"summary\" class=\"grid\"></div><section><h2>Observed drift over time</h2><div id=\"drift\"></div></section><section><h2>Latest answer distributions</h2><div id=\"cells\"></div></section><footer>“Notable shift” means this small fixed probe moved outside its observed history. It does not identify a cause.</footer></main><script>
+const fmt=n=>Number.isFinite(n)?n.toFixed(4):'—';
+fetch('data/history.json').then(r=>r.json()).then(days=>{const d=days.at(-1);const m=d.metrics||{};document.querySelector('#summary').innerHTML=[['Latest run',d.date],['Samples',`${d.total_valid}/${d.total_attempts}`],['Status',m.status||'insufficient baseline']].map(([a,b])=>`<div class=\"card\"><div class=\"label\">${a}</div><div class=\"value ${b==='notable shift'?'warn':''}\">${b}</div><div class=\"note\">${a==='Status'?`Baseline drift: ${fmt(m.baseline_jsd)}`:a==='Samples'?`Invalid: ${d.total_invalid}`:'Fixed battery v1'}</div></div>`).join('');document.querySelector('#drift').innerHTML=days.map(x=>`<div class=\"bar-row\"><span>${x.date}</span><div class=\"bar\"><div class=\"fill\" style=\"width:${Math.min(100,(x.metrics?.baseline_jsd||0)*200)}%\"></div></div><span>${fmt(x.metrics?.baseline_jsd)}</span></div>`).join('')||'<p>No public runs yet.</p>';document.querySelector('#cells').innerHTML=Object.entries(d.cells).map(([name,c])=>{const entries=Object.entries(c.counts).sort((a,b)=>b[1]-a[1]).slice(0,5);const max=Math.max(...entries.map(x=>x[1]),1);return `<article class=\"card\"><div class=\"label\">${name} · ${c.valid}/${c.attempts} valid</div>${entries.map(([label,count])=>`<div class=\"bar-row\"><span>${label}</span><div class=\"bar\"><div class=\"fill\" style=\"width:${count/max*100}%\"></div></div><span>${count}</span></div>`).join('')}</article>`}).join('')}).catch(()=>document.querySelector('#summary').innerHTML='<div class=\"card\">No public runs yet.</div>');
+</script></body></html>"""
