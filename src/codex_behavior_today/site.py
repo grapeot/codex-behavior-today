@@ -7,20 +7,99 @@ from pathlib import Path
 def build_site(days: list[dict], site_dir: Path) -> None:
     site_dir.mkdir(parents=True, exist_ok=True)
     (site_dir / "data").mkdir(exist_ok=True)
-    (site_dir / "data" / "history.json").write_text(json.dumps(days, ensure_ascii=False, indent=2) + "\n")
+    (site_dir / "data" / "history.json").write_text(
+        json.dumps(days, ensure_ascii=False, indent=2) + "\n"
+    )
     (site_dir / "index.html").write_text(_html())
 
 
 def _html() -> str:
     return """<!doctype html>
-<html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Did Codex Behave Differently Today?</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Did Codex Behave Differently Today?</title>
 <style>
-:root{--ink:#12366f;--muted:#5d6f8c;--paper:#f8fafc;--card:#fff;--line:#d9e0ea;--blue:#155eef;--blue-soft:#e9efff;--blue-dark:#092d75;--warn:#b54708;--radius:15px}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eff4ff 0,#f8fafc 380px);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif}.wrap{max-width:1120px;margin:auto;padding:50px 22px 80px}.eyebrow{color:var(--blue);font-weight:750;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px}h1{font:700 clamp(2.4rem,6vw,5.2rem)/.95 Georgia,serif;letter-spacing:-.06em;max-width:840px;margin:0;color:var(--blue-dark)}.lede{font-size:1.12rem;max-width:720px;color:#36527d;margin:20px 0 34px}.summary{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px}.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 4px 18px rgba(16,24,40,.035)}.label{font-size:.73rem;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}.value{font:700 1.55rem/1.15 Georgia,serif;margin-top:9px}.note{font-size:.84rem;color:var(--muted);margin-top:7px}.status{color:var(--blue-dark)}.shift{color:var(--warn)}section{margin-top:50px}h2{font:700 1.7rem Georgia,serif;letter-spacing:-.02em;margin:0 0 7px;color:var(--blue-dark)}.section-note{color:var(--muted);margin:0 0 18px;max-width:720px}.trend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.trend-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}.trend-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:12px}.trend-title{font-weight:750;color:var(--blue-dark)}.trend-meta{font-size:.78rem;color:var(--muted)}.chart{height:170px;width:100%;display:block;background:#fbfcff;border-radius:9px}.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.legend-item{display:flex;align-items:center;gap:5px;font-size:.74rem;color:#36527d}.dot{width:9px;height:9px;border-radius:999px}.day{cursor:pointer;outline:none}.day:hover,.day:focus{stroke:var(--blue-dark);stroke-width:2}.details{margin-top:16px}.detail-date{font-weight:750;color:var(--blue-dark)}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.bar-row{display:grid;grid-template-columns:78px 1fr 32px;gap:8px;align-items:center;margin:7px 0;font-size:.82rem}.bar{height:8px;background:#edf1f7;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--blue)}.empty{color:var(--muted);padding:28px 0}.method{margin-top:42px;padding:18px 20px;border-left:3px solid var(--blue);background:var(--blue-soft);color:#233876}footer{margin-top:54px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:.84rem}@media(max-width:760px){.summary,.trend-grid,.detail-grid{grid-template-columns:1fr}.wrap{padding-top:34px}.chart{height:145px}}
-</style></head><body><main class=\"wrap\"><p class=\"eyebrow\">Daily endpoint behavior monitor</p><h1>Did Codex behave differently today?</h1><p class=\"lede\">Thirty days of fixed, short probes through one Codex subscription path. The charts show observed endpoint behavior, not model identity or general capability.</p><div id=\"summary\" class=\"summary\"></div><section><h2>Thirty-day behavior trend</h2><p class=\"section-note\">Binary prompts use a share-over-time line. Multi-answer prompts use fixed-order, 100% stacked daily distributions. Select any day in a chart to inspect its recorded counts.</p><div id=\"trends\" class=\"trend-grid\"></div></section><section class=\"details\"><h2>Selected day</h2><p id=\"selected-note\" class=\"section-note\">Choose a day from any chart.</p><div id=\"selected\" class=\"detail-grid\"></div></section><div class=\"method\"><strong>Interpretation boundary.</strong> A visible shift means this fixed probe moved relative to its own observed history. It cannot establish why the endpoint changed, identify a model, or measure task capability.</div><footer>Public data are aggregate counts only. Raw responses and account credentials remain local.</footer></main><script>
-const colors=['#155eef','#e56f3f','#16866d','#8a5be8','#c74f7a','#0d91ab','#b1791c','#64748b','#d65b4d'];let selectedIndex=-1;const fixed={number_1_10:Array.from({length:10},(_,i)=>String(i+1)),letter:'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('')};const esc=x=>String(x).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));const fmt=n=>Number.isFinite(n)?n.toFixed(4):'—';
-function orderFor(slug,days){if(fixed[slug])return fixed[slug].map(x=>slug==='letter'?x.toLowerCase():x);const all={};days.forEach(d=>Object.entries(d.cells?.[slug]?.counts||{}).forEach(([k,v])=>all[k]=(all[k]||0)+v));return Object.entries(all).sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>x[0])}
-function selectDay(days,index){selectedIndex=index;const d=days[index];document.querySelector('#selected-note').innerHTML=`<span class=\"detail-date\">${esc(d.date)}</span> · ${d.total_valid}/${d.total_attempts} valid samples · ${esc(d.metrics?.status||'insufficient baseline')}`;document.querySelector('#selected').innerHTML=Object.entries(d.cells||{}).map(([slug,c])=>{const entries=Object.entries(c.counts||{}).sort((a,b)=>b[1]-a[1]);const max=Math.max(1,...entries.map(x=>x[1]));return `<article class=\"card\"><div class=\"trend-head\"><span class=\"trend-title\">${esc(slug)}</span><span class=\"trend-meta\">${c.valid}/${c.attempts} valid</span></div>${entries.map(([k,v])=>`<div class=\"bar-row\"><span>${esc(k)}</span><div class=\"bar\"><div class=\"fill\" style=\"width:${v/max*100}%\"></div></div><span>${v}</span></div>`).join('')||'<span class=\"trend-meta\">No valid answers</span>'}</article>`}).join('')}
-function stacked(slug,days){const categories=orderFor(slug,days);const other=slug==='number_1_100'||slug==='favorite_number';const w=100/Math.max(days.length,1),h=100;let bars='';days.forEach((d,i)=>{const c=d.cells?.[slug]||{counts:{},valid:0};let used=0;categories.forEach((key,j)=>{const part=(c.counts[key]||0)/Math.max(c.valid,1);const height=part*h;bars+=`<rect class=\"day\" tabindex=\"0\" data-i=\"${i}\" x=\"${i*w}\" y=\"${h-used-height}\" width=\"${Math.max(w-1,.8)}\" height=\"${height}\" fill=\"${colors[j%colors.length]}\"><title>${d.date}: ${key} ${Math.round(part*100)}%</title></rect>`;used+=height});if(other){const rest=Math.max(0,1-used/h);if(rest){bars+=`<rect class=\"day\" tabindex=\"0\" data-i=\"${i}\" x=\"${i*w}\" y=\"0\" width=\"${Math.max(w-1,.8)}\" height=\"${rest*h}\" fill=\"#d0d5dd\"><title>${d.date}: other ${Math.round(rest*100)}%</title></rect>`}}});return `<svg class=\"chart\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"none\">${bars}</svg><div class=\"legend\">${categories.map((x,i)=>`<span class=\"legend-item\"><i class=\"dot\" style=\"background:${colors[i%colors.length]}\"></i>${esc(x)}</span>`).join('')}${other?'<span class=\"legend-item\"><i class=\"dot\" style=\"background:#d0d5dd\"></i>other</span>':''}</div>`}
-function binary(slug,days){const points=days.map((d,i)=>{const c=d.cells?.[slug]||{counts:{},valid:0};const share=(c.counts.heads||0)/Math.max(c.valid,1);return [i/(Math.max(days.length-1,1))*100,100-share*100,d.date,share]}),line=points.map(p=>`${p[0]},${p[1]}`).join(' ');return `<svg class=\"chart\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"none\"><line x1=\"0\" y1=\"50\" x2=\"100\" y2=\"50\" stroke=\"#d0d5dd\" stroke-dasharray=\"2 2\"/><polyline points=\"${line}\" fill=\"none\" stroke=\"#155eef\" stroke-width=\"1.8\"/>${points.map((p,i)=>`<circle class=\"day\" tabindex=\"0\" data-i=\"${i}\" cx=\"${p[0]}\" cy=\"${p[1]}\" r=\"2.8\" fill=\"#155eef\"><title>${p[2]}: heads ${Math.round(p[3]*100)}%</title></circle>`).join('')}</svg><div class=\"legend\"><span class=\"legend-item\"><i class=\"dot\" style=\"background:#155eef\"></i>heads share</span><span class=\"legend-item\">dashed line = 50%</span></div>`}
-fetch('data/history.json').then(r=>r.json()).then(all=>{const days=all.slice(-30);if(!days.length){document.querySelector('#summary').innerHTML='<div class=\"card\">No public runs yet.</div>';return}const latest=days.at(-1),m=latest.metrics||{};document.querySelector('#summary').innerHTML=[['Latest run',latest.date,'Fixed battery v1'],['Samples',`${latest.total_valid}/${latest.total_attempts}`,`Invalid: ${latest.total_invalid}`],['Observed status',m.status||'insufficient baseline',`Baseline drift: ${fmt(m.baseline_jsd)}`]].map(([a,b,c])=>`<div class=\"card\"><div class=\"label\">${a}</div><div class=\"value ${b==='notable shift'?'shift':'status'}\">${esc(b)}</div><div class=\"note\">${c}</div></div>`).join('');const slugs=Object.keys(latest.cells||{});document.querySelector('#trends').innerHTML=slugs.map(slug=>`<article class=\"trend-card\"><div class=\"trend-head\"><span class=\"trend-title\">${esc(slug)}</span><span class=\"trend-meta\">last ${days.length} day${days.length===1?'':'s'}</span></div>${slug==='coin_flip'?binary(slug,days):stacked(slug,days)}</article>`).join('');document.querySelectorAll('.day').forEach(node=>{const choose=()=>selectDay(days,Number(node.dataset.i));node.addEventListener('click',choose);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')choose()})});selectDay(days,days.length-1)}).catch(()=>document.querySelector('#summary').innerHTML='<div class=\"card\">Public data could not be loaded.</div>');
-</script></body></html>"""
+:root{--ink:#172033;--muted:#667085;--paper:#f6f7f9;--card:#fff;--line:#e3e7ed;--blue:#2563eb;--blue-dark:#173b7a;--blue-soft:#e9f0ff;--warn:#b54708;--radius:10px}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1160px;margin:auto;padding:48px 24px 72px}.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,380px);gap:48px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:0 0 13px}h1{max-width:760px;margin:0;color:#101828;font-size:clamp(2.5rem,5vw,4.75rem);font-weight:720;line-height:.98;letter-spacing:-.055em}.lede{max-width:620px;margin:0;color:#475467;font-size:1.04rem;line-height:1.65}.summary{display:grid;grid-template-columns:1.25fr 1fr 1.2fr;gap:1px;margin-top:24px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.card{background:var(--card);padding:18px}.label{font-size:.72rem;font-weight:700;letter-spacing:.075em;text-transform:uppercase;color:var(--muted)}.value{margin-top:7px;color:#101828;font-size:1.45rem;font-weight:680;line-height:1.2;letter-spacing:-.025em}.note{margin-top:6px;color:var(--muted);font-size:.82rem}.status{color:var(--blue-dark)}.shift{color:var(--warn)}section{margin-top:50px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:18px}h2{margin:0;color:#101828;font-size:1.5rem;font-weight:680;line-height:1.2;letter-spacing:-.025em}.section-note{max-width:650px;margin:0;color:var(--muted);font-size:.9rem}.trend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.trend-card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}.trend-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:14px}.trend-title{color:#27364d;font-weight:680}.trend-meta{color:var(--muted);font-size:.76rem}.chart-frame{display:grid;grid-template-columns:24px minmax(0,1fr);grid-template-rows:170px 17px;column-gap:8px}.y-axis{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding:0 0 1px;color:#98a2b3;font-size:.64rem}.chart-wrap{position:relative;min-width:0;border-bottom:1px solid #d8dee8;background:linear-gradient(to bottom,transparent calc(50% - .5px),#edf0f4 calc(50% - .5px),#edf0f4 calc(50% + .5px),transparent calc(50% + .5px))}.chart{display:block;width:100%;height:170px;overflow:visible}.x-axis{grid-column:2;display:flex;justify-content:space-between;padding-top:5px;color:#98a2b3;font-size:.64rem}.day{cursor:pointer;outline:none}.day:focus-visible{stroke:#101828;stroke-width:1.2}.day.selected{stroke:#101828;stroke-width:.65}.legend{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:13px}.legend-item{display:flex;align-items:center;gap:6px;color:#59677d;font-size:.72rem}.dot{display:inline-block;width:8px;height:8px;border-radius:2px}.details{padding-top:4px}.detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail-grid .card{border:1px solid var(--line);border-radius:var(--radius)}.detail-date{color:#344054;font-weight:650}.bar-row{display:grid;grid-template-columns:minmax(36px,auto) minmax(40px,1fr) 24px;gap:8px;align-items:center;margin-top:8px;color:#475467;font-size:.75rem}.bar{height:6px;overflow:hidden;border-radius:99px;background:#edf0f4}.fill{height:100%;border-radius:inherit;background:var(--blue)}.method{margin-top:42px;padding:17px 19px;border-left:3px solid var(--blue);background:var(--blue-soft);color:#344054;font-size:.88rem}.method strong{color:var(--blue-dark)}footer{margin-top:26px;color:#7d899b;font-size:.76rem}@media(max-width:820px){.wrap{padding:34px 17px 56px}.hero{grid-template-columns:1fr;gap:20px;padding-bottom:28px}.summary{grid-template-columns:1fr}.trend-grid,.detail-grid{grid-template-columns:minmax(0,1fr)}.section-head{display:block}.section-note{margin-top:8px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero"><div><p class="eyebrow">Daily endpoint behavior monitor</p><h1>Did Codex behave differently today?</h1></div><p class="lede">Thirty days of fixed, short probes through one Codex subscription path. The charts show observed endpoint behavior, not model identity or general capability.</p></header>
+<div id="summary" class="summary"></div>
+<section><div class="section-head"><h2>Thirty-day behavior trend</h2><p class="section-note">Each bar is one day's answer distribution. Select a day to inspect its recorded counts.</p></div><div id="trends" class="trend-grid"></div></section>
+<section class="details"><div class="section-head"><h2>Selected day</h2><p id="selected-note" class="section-note">Choose a day from any chart.</p></div><div id="selected" class="detail-grid"></div></section>
+<div class="method"><strong>Interpretation boundary.</strong> A visible shift means this fixed probe moved relative to its own observed history. It cannot establish why the endpoint changed, identify a model, or measure task capability.</div>
+<footer>Public data are aggregate counts only. Raw responses and account credentials remain local.</footer>
+</main>
+<script>
+const colors=['#2563eb','#63a6e8','#159477','#8a63d2','#db6b55','#d04f86','#2b91a8','#b17b2f','#7b8799','#b9c1cd'];
+let selectedIndex=-1;
+const fixed={coin_flip:['heads','tails'],number_1_10:Array.from({length:10},(_,i)=>String(i+1)),letter:'abcdefghijklmnopqrstuvwxyz'.split('')};
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Number.isFinite(n)?n.toFixed(4):'—';
+const titleFor=slug=>slug.split('_').map(x=>x[0].toUpperCase()+x.slice(1)).join(' ');
+
+function orderFor(slug,days){
+  if(fixed[slug])return fixed[slug];
+  const all={};
+  days.forEach(d=>Object.entries(d.cells?.[slug]?.counts||{}).forEach(([k,v])=>all[k]=(all[k]||0)+v));
+  return Object.entries(all).sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>x[0]);
+}
+
+function selectDay(days,index){
+  selectedIndex=index;
+  document.querySelectorAll('.day').forEach(node=>node.classList.toggle('selected',Number(node.dataset.i)===index));
+  const d=days[index];
+  document.querySelector('#selected-note').innerHTML=`<span class="detail-date">${esc(d.date)}</span> · ${d.total_valid}/${d.total_attempts} valid samples · ${esc(d.metrics?.status||'insufficient baseline')}`;
+  document.querySelector('#selected').innerHTML=Object.entries(d.cells||{}).map(([slug,c])=>{
+    const entries=Object.entries(c.counts||{}).sort((a,b)=>b[1]-a[1]);
+    const max=Math.max(1,...entries.map(x=>x[1]));
+    return `<article class="card"><div class="trend-head"><span class="trend-title">${esc(titleFor(slug))}</span><span class="trend-meta">${c.valid}/${c.attempts} valid</span></div>${entries.map(([k,v])=>`<div class="bar-row"><span>${esc(k)}</span><div class="bar"><div class="fill" style="width:${v/max*100}%"></div></div><span>${v}</span></div>`).join('')||'<span class="trend-meta">No valid answers</span>'}</article>`;
+  }).join('');
+}
+
+function stacked(slug,days){
+  const categories=orderFor(slug,days);
+  const hasOther=slug==='number_1_100'||slug==='favorite_number';
+  const w=100/Math.max(days.length,1),h=100;
+  let bars='';
+  days.forEach((d,i)=>{
+    const c=d.cells?.[slug]||{counts:{},valid:0};
+    let used=0;
+    categories.forEach((key,j)=>{
+      const part=(c.counts[key]||0)/Math.max(c.valid,1);
+      const height=part*h;
+      bars+=`<rect x="${i*w+.35}" y="${h-used-height}" width="${Math.max(w-.7,.8)}" height="${height}" rx=".45" fill="${colors[j%colors.length]}"><title>${d.date}: ${key} ${Math.round(part*100)}%</title></rect>`;
+      used+=height;
+    });
+    if(hasOther){
+      const rest=Math.max(0,1-used/h);
+      if(rest)bars+=`<rect x="${i*w+.35}" y="0" width="${Math.max(w-.7,.8)}" height="${rest*h}" rx=".45" fill="#b9c1cd"><title>${d.date}: other ${Math.round(rest*100)}%</title></rect>`;
+    }
+    const summary=categories.map(key=>`${key} ${Math.round((c.counts[key]||0)/Math.max(c.valid,1)*100)}%`).join(', ');
+    bars+=`<rect class="day" role="button" tabindex="0" aria-label="${esc(d.date)}: ${esc(summary)}" data-i="${i}" x="${i*w+.35}" y="0" width="${Math.max(w-.7,.8)}" height="100" fill="transparent"><title>${d.date}: ${summary}</title></rect>`;
+  });
+  const first=days[0]?.date?.slice(5)||'';
+  const last=days.at(-1)?.date?.slice(5)||'';
+  return `<div class="chart-frame"><div class="y-axis"><span>100%</span><span>50</span><span>0</span></div><div class="chart-wrap"><svg class="chart" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="${esc(titleFor(slug))} daily answer distributions">${bars}</svg></div><div class="x-axis"><span>${esc(first)}</span><span>${esc(last)}</span></div></div><div class="legend">${categories.map((x,i)=>`<span class="legend-item"><i class="dot" style="background:${colors[i%colors.length]}"></i>${esc(x)}</span>`).join('')}${hasOther?'<span class="legend-item"><i class="dot" style="background:#b9c1cd"></i>other</span>':''}</div>`;
+}
+
+fetch('data/history.json').then(r=>r.json()).then(all=>{
+  const days=all.slice(-30);
+  if(!days.length){document.querySelector('#summary').innerHTML='<div class="card">No public runs yet.</div>';return}
+  const latest=days.at(-1),m=latest.metrics||{};
+  document.querySelector('#summary').innerHTML=[['Latest run',latest.date,'Fixed battery v1'],['Samples',`${latest.total_valid}/${latest.total_attempts}`,`Invalid: ${latest.total_invalid}`],['Observed status',m.status||'insufficient baseline',`Baseline drift: ${fmt(m.baseline_jsd)}`]].map(([a,b,c])=>`<div class="card"><div class="label">${a}</div><div class="value ${b==='notable shift'?'shift':'status'}">${esc(b)}</div><div class="note">${c}</div></div>`).join('');
+  const slugs=Object.keys(latest.cells||{});
+  document.querySelector('#trends').innerHTML=slugs.map(slug=>`<article class="trend-card"><div class="trend-head"><span class="trend-title">${esc(titleFor(slug))}</span><span class="trend-meta">last ${days.length} day${days.length===1?'':'s'}</span></div>${stacked(slug,days)}</article>`).join('');
+  document.querySelectorAll('.day').forEach(node=>{
+    const choose=()=>selectDay(days,Number(node.dataset.i));
+    node.addEventListener('click',choose);
+    node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}});
+  });
+  selectDay(days,days.length-1);
+}).catch(()=>document.querySelector('#summary').innerHTML='<div class="card">Public data could not be loaded.</div>');
+</script>
+</body>
+</html>"""
