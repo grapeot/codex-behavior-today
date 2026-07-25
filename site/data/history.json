@@ -284,5 +284,102 @@
       "status": "insufficient baseline",
       "threshold_99": null
     }
+  },
+  {
+    "schema_version": 1,
+    "date": "2026-07-25",
+    "measurement": {
+      "model": "gpt-5.6-sol",
+      "transport": "chatgpt-codex-subscription-compatibility",
+      "probe_battery": "v1",
+      "request_protocol": "v1"
+    },
+    "cells": {
+      "number_1_10": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "7": 20
+        },
+        "latency_ms": {
+          "median": 1315.5,
+          "min": 962.63,
+          "max": 4936.28
+        }
+      },
+      "coin_flip": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "heads": 3,
+          "tails": 17
+        },
+        "latency_ms": {
+          "median": 1547.02,
+          "min": 1154.64,
+          "max": 2987.01
+        }
+      },
+      "letter": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "k": 1,
+          "q": 19
+        },
+        "latency_ms": {
+          "median": 1358.39,
+          "min": 1063.36,
+          "max": 3604.37
+        }
+      },
+      "number_1_100": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "47": 14,
+          "57": 6
+        },
+        "latency_ms": {
+          "median": 1337.19,
+          "min": 930.69,
+          "max": 2966.03
+        }
+      },
+      "favorite_number": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "42": 5,
+          "7": 15
+        },
+        "latency_ms": {
+          "median": 1234.23,
+          "min": 983.69,
+          "max": 3605.11
+        }
+      }
+    },
+    "total_attempts": 100,
+    "total_valid": 100,
+    "total_invalid": 0,
+    "metrics": {
+      "previous_day_jsd": 0.05314892234763776,
+      "baseline_jsd": 0.03026065369526332,
+      "cell_baseline_jsd": {
+        "number_1_10": 0.0,
+        "coin_flip": 0.01136888029959569,
+        "letter": 0.025462452938692228,
+        "number_1_100": 0.0769970009710576,
+        "favorite_number": 0.03747493426697108
+      },
+      "status": "insufficient baseline",
+      "threshold_99": null
+    }
   }
 ]
