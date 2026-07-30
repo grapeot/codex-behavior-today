@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-07-30",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 15,
+      "invalid": 5,
+      "counts": {
+        "7": 15
+      },
+      "latency_ms": {
+        "median": 3147.92,
+        "min": 699.19,
+        "max": 9052.74
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 16,
+      "invalid": 4,
+      "counts": {
+        "tails": 16
+      },
+      "latency_ms": {
+        "median": 3241.45,
+        "min": 678.2,
+        "max": 8309.09
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 9,
+      "invalid": 11,
+      "counts": {
+        "q": 9
+      },
+      "latency_ms": {
+        "median": 1231.59,
+        "min": 654.87,
+        "max": 9046.62
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 14,
+      "invalid": 6,
+      "counts": {
+        "47": 12,
+        "57": 2
+      },
+      "latency_ms": {
+        "median": 1835.86,
+        "min": 724.11,
+        "max": 9259.38
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 17,
+      "invalid": 3,
+      "counts": {
+        "42": 2,
+        "7": 14,
+        "73": 1
+      },
+      "latency_ms": {
+        "median": 3943.91,
+        "min": 778.48,
+        "max": 9909.92
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 71,
+  "total_invalid": 29,
+  "metrics": {
+    "previous_day_jsd": 0.07469525387043792,
+    "baseline_jsd": 0.04277644820574384,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.09783166991749528,
+      "letter": 0.0068833893830291095,
+      "number_1_100": 0.05530699567148037,
+      "favorite_number": 0.03738662706352359
+    },
+    "status": "insufficient baseline",
+    "threshold_99": null
+  }
+}
