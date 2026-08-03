@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-03",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 19,
+      "invalid": 1,
+      "counts": {
+        "7": 19
+      },
+      "latency_ms": {
+        "median": 1398.61,
+        "min": 954.54,
+        "max": 6885.95
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 1,
+        "tails": 19
+      },
+      "latency_ms": {
+        "median": 1370.79,
+        "min": 959.35,
+        "max": 3988.95
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 20
+      },
+      "latency_ms": {
+        "median": 1460.04,
+        "min": 1242.96,
+        "max": 3951.55
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "47": 13,
+        "57": 4,
+        "73": 3
+      },
+      "latency_ms": {
+        "median": 1288.54,
+        "min": 1049.67,
+        "max": 3660.47
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 2,
+        "7": 18
+      },
+      "latency_ms": {
+        "median": 1385.1,
+        "min": 879.15,
+        "max": 4945.07
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 99,
+  "total_invalid": 1,
+  "metrics": {
+    "previous_day_jsd": 0.029114706594089466,
+    "baseline_jsd": 0.011107225905165654,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.027735051885550005,
+      "letter": 0.007012102723680916,
+      "number_1_100": 0.011206042416094159,
+      "favorite_number": 0.009027571205244903
+    },
+    "status": "insufficient baseline",
+    "threshold_99": null
+  }
+}
