@@ -1840,5 +1840,103 @@
       "status": "notable shift",
       "threshold_99": 0.02186170846480955
     }
+  },
+  {
+    "schema_version": 1,
+    "date": "2026-08-10",
+    "measurement": {
+      "model": "gpt-5.6-sol",
+      "transport": "chatgpt-codex-subscription-compatibility",
+      "probe_battery": "v1",
+      "request_protocol": "v1"
+    },
+    "cells": {
+      "number_1_10": {
+        "attempts": 20,
+        "valid": 19,
+        "invalid": 1,
+        "counts": {
+          "7": 19
+        },
+        "latency_ms": {
+          "median": 2056.83,
+          "min": 1359.32,
+          "max": 120126.52
+        }
+      },
+      "coin_flip": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "heads": 3,
+          "tails": 17
+        },
+        "latency_ms": {
+          "median": 1946.35,
+          "min": 1354.64,
+          "max": 5163.01
+        }
+      },
+      "letter": {
+        "attempts": 20,
+        "valid": 19,
+        "invalid": 1,
+        "counts": {
+          "q": 19
+        },
+        "latency_ms": {
+          "median": 1789.07,
+          "min": 1264.16,
+          "max": 120123.03
+        }
+      },
+      "number_1_100": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "37": 1,
+          "47": 12,
+          "57": 5,
+          "73": 2
+        },
+        "latency_ms": {
+          "median": 1612.25,
+          "min": 1200.4,
+          "max": 4989.84
+        }
+      },
+      "favorite_number": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "42": 2,
+          "7": 18
+        },
+        "latency_ms": {
+          "median": 1674.08,
+          "min": 1352.57,
+          "max": 2377.4
+        }
+      }
+    },
+    "total_attempts": 100,
+    "total_valid": 98,
+    "total_invalid": 2,
+    "metrics": {
+      "previous_day_jsd": 0.03954569569323763,
+      "baseline_jsd": 0.01301054801103935,
+      "cell_baseline_jsd": {
+        "number_1_10": 0.0,
+        "coin_flip": 0.002089490537054645,
+        "letter": 0.005884286611584992,
+        "number_1_100": 0.0387420694771721,
+        "favorite_number": 0.017330052958860333
+      },
+      "status": "within observed range",
+      "threshold_99": 0.027157407082053303
+    }
   }
 ]
