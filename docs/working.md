@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 2026-08-15
+
+- Added a footer GitHub icon linking to the public repository.
+
 ### 2026-07-24
 
 - Reworked the dashboard into a lower-fatigue, sans-serif monitoring surface with quieter hierarchy and responsive chart cards.
