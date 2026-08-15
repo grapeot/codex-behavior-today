@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-15",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1697.32,
+        "min": 1234.52,
+        "max": 9529.72
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 1,
+        "tails": 19
+      },
+      "latency_ms": {
+        "median": 1731.96,
+        "min": 1306.66,
+        "max": 3870.4
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 20
+      },
+      "latency_ms": {
+        "median": 1818.77,
+        "min": 1370.49,
+        "max": 4350.69
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "47": 18,
+        "57": 1,
+        "73": 1
+      },
+      "latency_ms": {
+        "median": 1562.02,
+        "min": 1308.32,
+        "max": 3347.62
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 4,
+        "7": 16
+      },
+      "latency_ms": {
+        "median": 1567.5,
+        "min": 1163.59,
+        "max": 2843.88
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.037381591917757355,
+    "baseline_jsd": 0.020019351117497985,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.023301938965842487,
+      "letter": 0.0072057944845861635,
+      "number_1_100": 0.04604739613718168,
+      "favorite_number": 0.023541625999879582
+    },
+    "status": "within observed range",
+    "threshold_99": 0.027157407082053303
+  }
+}
