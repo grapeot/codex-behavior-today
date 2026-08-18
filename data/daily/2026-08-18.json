@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-18",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1893.17,
+        "min": 1481.1,
+        "max": 4813.12
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 2,
+        "tails": 18
+      },
+      "latency_ms": {
+        "median": 2140.84,
+        "min": 1451.73,
+        "max": 14134.95
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 20
+      },
+      "latency_ms": {
+        "median": 2124.19,
+        "min": 1434.2,
+        "max": 2793.64
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "47": 16,
+        "57": 3,
+        "73": 1
+      },
+      "latency_ms": {
+        "median": 2167.22,
+        "min": 1614.3,
+        "max": 5096.7
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 1,
+        "7": 19
+      },
+      "latency_ms": {
+        "median": 1908.34,
+        "min": 1251.24,
+        "max": 4207.04
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.010882210226557752,
+    "baseline_jsd": 0.009571222546053925,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.0022200056971630917,
+      "letter": 0.00539730749878688,
+      "number_1_100": 0.008489372800184802,
+      "favorite_number": 0.031749426734134854
+    },
+    "status": "within observed range",
+    "threshold_99": 0.027157407082053303
+  }
+}
