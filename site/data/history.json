@@ -3404,5 +3404,102 @@
       "status": "within observed range",
       "threshold_99": 0.027157407082053296
     }
+  },
+  {
+    "schema_version": 1,
+    "date": "2026-08-26",
+    "measurement": {
+      "model": "gpt-5.6-sol",
+      "transport": "chatgpt-codex-subscription-compatibility",
+      "probe_battery": "v1",
+      "request_protocol": "v1"
+    },
+    "cells": {
+      "number_1_10": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "7": 20
+        },
+        "latency_ms": {
+          "median": 2042.79,
+          "min": 1656.99,
+          "max": 3126.98
+        }
+      },
+      "coin_flip": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "heads": 4,
+          "tails": 16
+        },
+        "latency_ms": {
+          "median": 2142.0,
+          "min": 1504.7,
+          "max": 7093.38
+        }
+      },
+      "letter": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "q": 20
+        },
+        "latency_ms": {
+          "median": 2096.21,
+          "min": 1367.58,
+          "max": 6286.86
+        }
+      },
+      "number_1_100": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "47": 15,
+          "57": 4,
+          "73": 1
+        },
+        "latency_ms": {
+          "median": 1801.54,
+          "min": 1322.23,
+          "max": 3483.96
+        }
+      },
+      "favorite_number": {
+        "attempts": 20,
+        "valid": 20,
+        "invalid": 0,
+        "counts": {
+          "42": 2,
+          "7": 18
+        },
+        "latency_ms": {
+          "median": 1772.3,
+          "min": 1362.75,
+          "max": 3584.34
+        }
+      }
+    },
+    "total_attempts": 100,
+    "total_valid": 100,
+    "total_invalid": 0,
+    "metrics": {
+      "previous_day_jsd": 0.018411366318008427,
+      "baseline_jsd": 0.008811622814682512,
+      "cell_baseline_jsd": {
+        "number_1_10": 0.0,
+        "coin_flip": 0.0053632707872227105,
+        "letter": 0.005377956396103724,
+        "number_1_100": 0.014139450572901708,
+        "favorite_number": 0.019177436317184417
+      },
+      "status": "within observed range",
+      "threshold_99": 0.027157407082053303
+    }
   }
 ]
