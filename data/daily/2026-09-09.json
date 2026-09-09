@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-09",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 2799.67,
+        "min": 2182.85,
+        "max": 16648.51
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 1,
+        "tails": 19
+      },
+      "latency_ms": {
+        "median": 2834.72,
+        "min": 2340.89,
+        "max": 12229.25
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 20
+      },
+      "latency_ms": {
+        "median": 2837.92,
+        "min": 2235.21,
+        "max": 19653.7
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "47": 13,
+        "57": 3,
+        "73": 4
+      },
+      "latency_ms": {
+        "median": 2867.29,
+        "min": 2355.54,
+        "max": 12322.18
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 6,
+        "7": 12,
+        "73": 2
+      },
+      "latency_ms": {
+        "median": 2556.51,
+        "min": 1842.98,
+        "max": 17011.9
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.04165850334244077,
+    "baseline_jsd": 0.02313225791981674,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.018701115953419223,
+      "letter": 0.0071799256805270256,
+      "number_1_100": 0.0541113738405532,
+      "favorite_number": 0.03566887412458427
+    },
+    "status": "within observed range",
+    "threshold_99": 0.040450692195336674
+  }
+}
