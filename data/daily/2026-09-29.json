@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-29",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1929.26,
+        "min": 1366.21,
+        "max": 3570.46
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 2,
+        "tails": 18
+      },
+      "latency_ms": {
+        "median": 2052.18,
+        "min": 1480.86,
+        "max": 3498.63
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 20
+      },
+      "latency_ms": {
+        "median": 1901.08,
+        "min": 1484.62,
+        "max": 4188.66
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "47": 17,
+        "57": 3
+      },
+      "latency_ms": {
+        "median": 1862.3,
+        "min": 1350.91,
+        "max": 3219.23
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 6,
+        "7": 14
+      },
+      "latency_ms": {
+        "median": 1779.86,
+        "min": 1316.06,
+        "max": 3707.95
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.02317983897168867,
+    "baseline_jsd": 0.014272475609550236,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.010717709683077989,
+      "letter": 0.0038568658941592706,
+      "number_1_100": 0.018940801704210725,
+      "favorite_number": 0.03784700076630321
+    },
+    "status": "within observed range",
+    "threshold_99": 0.040450692195336674
+  }
+}
