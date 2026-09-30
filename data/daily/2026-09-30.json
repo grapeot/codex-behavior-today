@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-30",
+  "measurement": {
+    "model": "gpt-5.6-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 0,
+      "invalid": 20,
+      "counts": {},
+      "latency_ms": {
+        "median": 300.88,
+        "min": 245.03,
+        "max": 458.38
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 0,
+      "invalid": 20,
+      "counts": {},
+      "latency_ms": {
+        "median": 311.97,
+        "min": 249.13,
+        "max": 522.59
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 0,
+      "invalid": 20,
+      "counts": {},
+      "latency_ms": {
+        "median": 304.08,
+        "min": 242.63,
+        "max": 403.49
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 0,
+      "invalid": 20,
+      "counts": {},
+      "latency_ms": {
+        "median": 294.3,
+        "min": 237.69,
+        "max": 372.77
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 0,
+      "invalid": 20,
+      "counts": {},
+      "latency_ms": {
+        "median": 289.07,
+        "min": 239.19,
+        "max": 538.3
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 0,
+  "total_invalid": 100,
+  "metrics": {
+    "previous_day_jsd": NaN,
+    "baseline_jsd": NaN,
+    "cell_baseline_jsd": {},
+    "status": "within observed range",
+    "threshold_99": 0.040450692195336674
+  }
+}
