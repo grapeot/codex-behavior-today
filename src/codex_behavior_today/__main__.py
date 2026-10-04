@@ -8,9 +8,11 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
+from . import DEFAULT_MODEL
 from .metrics import jsd, status_for, weighted_drift
 from .probes import PROBES, PROBE_BATTERY_VERSION
 from .sampler import configured_oauth_cli, sample_probe
+from .serialization import public_json
 from .site import build_site
 from .storage import connect
 
@@ -26,7 +28,7 @@ def load_days() -> list[dict]:
 
 def run_daily(target_per_cell: int) -> dict:
     run_date = date.today().isoformat()
-    model = os.environ.get("CODEX_BEHAVIOR_MODEL", "gpt-5.6-sol")
+    model = os.environ.get("CODEX_BEHAVIOR_MODEL", DEFAULT_MODEL)
     connection = connect(RUNTIME_DB)
     cells = {}
     for probe in PROBES:
@@ -66,8 +68,8 @@ def run_daily(target_per_cell: int) -> dict:
     status, threshold = status_for(current, previous)
     current["metrics"] = {"previous_day_jsd": previous_day_drift, "baseline_jsd": baseline_drift, "cell_baseline_jsd": cell_drift, "status": status, "threshold_99": threshold}
     DAILY_DIR.mkdir(parents=True, exist_ok=True)
-    (DAILY_DIR / f"{run_date}.json").write_text(json.dumps(current, ensure_ascii=False, indent=2) + "\n")
-    build_site(load_days(), ROOT / "site")
+    (DAILY_DIR / f"{run_date}.json").write_text(public_json(current))
+    build_site(load_days(), ROOT / "site", model=model)
     return current
 
 
@@ -79,10 +81,10 @@ def main() -> int:
     subcommands.add_parser("build-site", help="Build the static site from public aggregate JSON.")
     args = parser.parse_args()
     if args.command == "run":
-        print(json.dumps(run_daily(args.per_cell), ensure_ascii=False, indent=2))
+        print(public_json(run_daily(args.per_cell)), end="")
         return 0
     if args.command == "build-site":
-        build_site(load_days(), ROOT / "site")
+        build_site(load_days(), ROOT / "site", model=os.environ.get("CODEX_BEHAVIOR_MODEL", DEFAULT_MODEL))
         return 0
     return 2
 

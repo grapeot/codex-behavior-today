@@ -2,6 +2,12 @@
 
 ## Changelog
 
+### 2026-10-03
+
+- Switched the default monitoring target to `gpt-6.1-sol` and added a transition warning for visible cross-model history, retaining the fixed probes and existing baseline calculations.
+- Added per-day model labels and strict JSON serialization of unavailable metrics as `null`, retaining older daily source records.
+- Verified warning behavior and generated JSON offline against historical aggregates and executable dashboard fixtures.
+
 ### 2026-08-15
 
 - Added a footer GitHub icon linking to the public repository.
@@ -19,6 +25,8 @@
 - Added the publish command's offline preflight mode for scheduled-job validation.
 
 ## Lessons Learned
+
+- Treat cross-model transitions distinctly from within-model behavioral drift, and serialize unavailable numeric metrics as explicit nulls for strict JSON validity.
 
 - The dashboard monitors a subscription endpoint behavior envelope, not a model identity.
 - Raw responses are needed for local audit but must never enter the public aggregate history.
