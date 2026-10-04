@@ -6,6 +6,8 @@
 
 统计对象是 endpoint 的条件输出分布，不是模型权重。请求参数无法由 subscription compatibility transport 可靠控制时，页面必须将结果表述为该 transport 下的观察。
 
+2026-10-03 将监控测量目标切换为 `gpt-6.1-sol`，保留历史聚合数据与既有基线计算逻辑，不将旧记录重新标成新模型。当最近 30 天视图包含与当前目标不同的模型数据时，页面展示过渡警告，并在选中日与最新运行摘要显示该日模型，避免将跨模型差异误读为单一模型的行为漂移。页面导出的 JSON 将不可用数值序列化为 `null`，保留旧的原始日度源文件；新的日度输出也采用合法 JSON。
+
 ## Data Flow
 
 本机 sampler 逐个请求目标 cell，记录原始回答到 ignored SQLite。随后生成公开 aggregate JSON：计数、无效回答数、latency summary 与 distribution metrics。静态页面只读取公开 aggregate JSON。

@@ -6120,8 +6120,8 @@
     "total_valid": 0,
     "total_invalid": 100,
     "metrics": {
-      "previous_day_jsd": NaN,
-      "baseline_jsd": NaN,
+      "previous_day_jsd": null,
+      "baseline_jsd": null,
       "cell_baseline_jsd": {},
       "status": "within observed range",
       "threshold_99": 0.040450692195336674
@@ -6210,7 +6210,7 @@
     "total_valid": 100,
     "total_invalid": 0,
     "metrics": {
-      "previous_day_jsd": NaN,
+      "previous_day_jsd": null,
       "baseline_jsd": 0.019209844537533462,
       "cell_baseline_jsd": {
         "number_1_10": 0.0,
@@ -6780,8 +6780,8 @@
     "total_valid": 0,
     "total_invalid": 100,
     "metrics": {
-      "previous_day_jsd": NaN,
-      "baseline_jsd": NaN,
+      "previous_day_jsd": null,
+      "baseline_jsd": null,
       "cell_baseline_jsd": {},
       "status": "within observed range",
       "threshold_99": 0.040450692195336674
@@ -6857,8 +6857,8 @@
     "total_valid": 0,
     "total_invalid": 100,
     "metrics": {
-      "previous_day_jsd": NaN,
-      "baseline_jsd": NaN,
+      "previous_day_jsd": null,
+      "baseline_jsd": null,
       "cell_baseline_jsd": {},
       "status": "within observed range",
       "threshold_99": 0.04045069219533666
@@ -6934,8 +6934,8 @@
     "total_valid": 0,
     "total_invalid": 100,
     "metrics": {
-      "previous_day_jsd": NaN,
-      "baseline_jsd": NaN,
+      "previous_day_jsd": null,
+      "baseline_jsd": null,
       "cell_baseline_jsd": {},
       "status": "within observed range",
       "threshold_99": 0.04045069219533667
@@ -7011,8 +7011,8 @@
     "total_valid": 0,
     "total_invalid": 100,
     "metrics": {
-      "previous_day_jsd": NaN,
-      "baseline_jsd": NaN,
+      "previous_day_jsd": null,
+      "baseline_jsd": null,
       "cell_baseline_jsd": {},
       "status": "within observed range",
       "threshold_99": 0.040450692195336674

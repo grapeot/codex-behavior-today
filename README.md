@@ -21,7 +21,7 @@ The sampler delegates authenticated requests to a locally installed ChatGPT/Code
 
 ```bash
 export CODEX_BEHAVIOR_OAUTH_CLI=/path/to/chatgpt-oauth
-export CODEX_BEHAVIOR_MODEL=gpt-5.6-sol
+export CODEX_BEHAVIOR_MODEL=gpt-6.1-sol
 ```
 
 Run one daily sample and build the site:
@@ -31,6 +31,8 @@ Run one daily sample and build the site:
 ```
 
 This project does not distribute credentials or a shared endpoint. To reproduce a live run, first authorize an owner-controlled local ChatGPT/Codex OAuth CLI with your own subscription, then point `CODEX_BEHAVIOR_OAUTH_CLI` at that executable. The resulting data describe the endpoint behavior available to that account and route, not a universal property of the named model.
+
+The dashboard now monitors `gpt-6.1-sol` as its target model, displaying a banner warning whenever the visible window includes samples from other models. Historical aggregate records remain preserved, while the fixed prompt suite and baseline calculation methodology remain unchanged. Comparisons across model changes are not directly comparable and must not be interpreted as within-model drift.
 
 Build the static site from existing public aggregates only:
 
