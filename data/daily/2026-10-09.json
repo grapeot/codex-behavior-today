@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-09",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 3044.87,
+        "min": 2092.41,
+        "max": 7938.51
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 3,
+        "tails": 17
+      },
+      "latency_ms": {
+        "median": 2541.16,
+        "min": 1997.45,
+        "max": 4684.01
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "m": 2,
+        "q": 13,
+        "r": 5
+      },
+      "latency_ms": {
+        "median": 4066.81,
+        "min": 1798.61,
+        "max": 12944.29
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 1,
+        "47": 14,
+        "67": 1,
+        "73": 4
+      },
+      "latency_ms": {
+        "median": 3256.37,
+        "min": 1923.2,
+        "max": 5880.29
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 19,
+      "invalid": 1,
+      "counts": {
+        "7": 19
+      },
+      "latency_ms": {
+        "median": 2710.65,
+        "min": 2173.54,
+        "max": 10491.68
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 99,
+  "total_invalid": 1,
+  "metrics": {
+    "previous_day_jsd": 0.04134221576116479,
+    "baseline_jsd": 0.06436534552341183,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.0005370129102561178,
+      "letter": 0.09150241152179238,
+      "number_1_100": 0.11272843955947204,
+      "favorite_number": 0.11983220668354526
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
