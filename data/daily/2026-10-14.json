@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-14",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 3197.37,
+        "min": 2014.95,
+        "max": 7858.76
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 6,
+        "tails": 14
+      },
+      "latency_ms": {
+        "median": 3069.86,
+        "min": 1797.0,
+        "max": 8958.95
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 19,
+      "invalid": 1,
+      "counts": {
+        "q": 16,
+        "r": 3
+      },
+      "latency_ms": {
+        "median": 3273.95,
+        "min": 510.95,
+        "max": 6381.35
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 1,
+        "47": 15,
+        "73": 4
+      },
+      "latency_ms": {
+        "median": 3480.38,
+        "min": 1665.55,
+        "max": 8742.67
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 2,
+        "7": 18
+      },
+      "latency_ms": {
+        "median": 3032.04,
+        "min": 1979.39,
+        "max": 6390.98
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 99,
+  "total_invalid": 1,
+  "metrics": {
+    "previous_day_jsd": 0.04574067881077523,
+    "baseline_jsd": 0.022390985859287043,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.017128270983145413,
+      "letter": 0.046532817521639847,
+      "number_1_100": 0.04443192255136386,
+      "favorite_number": 0.005069009823403728
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
