@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-15",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1992.06,
+        "min": 1218.23,
+        "max": 4501.78
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 5,
+        "tails": 15
+      },
+      "latency_ms": {
+        "median": 1857.41,
+        "min": 1417.05,
+        "max": 3326.99
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 16,
+        "r": 4
+      },
+      "latency_ms": {
+        "median": 1995.59,
+        "min": 1470.12,
+        "max": 4827.63
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 2,
+        "47": 9,
+        "57": 1,
+        "67": 2,
+        "73": 6
+      },
+      "latency_ms": {
+        "median": 1935.46,
+        "min": 1386.47,
+        "max": 12222.04
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 2,
+        "7": 18
+      },
+      "latency_ms": {
+        "median": 2459.8,
+        "min": 1459.05,
+        "max": 5609.57
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.024034725239325722,
+    "baseline_jsd": 0.02652259282700883,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.003159830271431383,
+      "letter": 0.04737687544549968,
+      "number_1_100": 0.07818421265847031,
+      "favorite_number": 0.0038920457596427985
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
