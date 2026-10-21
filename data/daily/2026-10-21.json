@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1864.08,
+        "min": 1393.1,
+        "max": 3029.42
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 1,
+        "tails": 19
+      },
+      "latency_ms": {
+        "median": 2003.08,
+        "min": 1544.49,
+        "max": 4953.91
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "q": 15,
+        "r": 5
+      },
+      "latency_ms": {
+        "median": 2012.51,
+        "min": 1539.52,
+        "max": 5662.69
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 2,
+        "42": 1,
+        "47": 8,
+        "57": 1,
+        "67": 1,
+        "73": 7
+      },
+      "latency_ms": {
+        "median": 2056.77,
+        "min": 1576.84,
+        "max": 4084.1
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 2,
+        "7": 18
+      },
+      "latency_ms": {
+        "median": 2209.11,
+        "min": 1728.33,
+        "max": 3314.58
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.07898657687116956,
+    "baseline_jsd": 0.0287008362997932,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.03239216948458688,
+      "letter": 0.052380648974616306,
+      "number_1_100": 0.05773887494212468,
+      "favorite_number": 0.0009924880976381178
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
