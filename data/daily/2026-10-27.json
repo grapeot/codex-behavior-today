@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 2582.53,
+        "min": 1686.64,
+        "max": 4150.25
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 6,
+        "tails": 14
+      },
+      "latency_ms": {
+        "median": 2381.53,
+        "min": 1411.74,
+        "max": 6749.5
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "m": 2,
+        "q": 14,
+        "r": 4
+      },
+      "latency_ms": {
+        "median": 2448.5,
+        "min": 1640.52,
+        "max": 5429.5
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 2,
+        "47": 7,
+        "57": 2,
+        "67": 1,
+        "73": 8
+      },
+      "latency_ms": {
+        "median": 2359.86,
+        "min": 1633.96,
+        "max": 4720.07
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "42": 3,
+        "7": 17
+      },
+      "latency_ms": {
+        "median": 2282.0,
+        "min": 1763.22,
+        "max": 4630.37
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.03266795354192983,
+    "baseline_jsd": 0.011768213059422883,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.0129042185500928,
+      "letter": 0.01715053199902968,
+      "number_1_100": 0.028768448203930964,
+      "favorite_number": 1.78665440609706e-05
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
