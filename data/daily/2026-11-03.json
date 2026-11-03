@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "measurement": {
+    "model": "gpt-6.1-sol",
+    "transport": "chatgpt-codex-subscription-compatibility",
+    "probe_battery": "v1",
+    "request_protocol": "v1"
+  },
+  "cells": {
+    "number_1_10": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "7": 20
+      },
+      "latency_ms": {
+        "median": 1902.31,
+        "min": 1590.7,
+        "max": 3225.59
+      }
+    },
+    "coin_flip": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "heads": 3,
+        "tails": 17
+      },
+      "latency_ms": {
+        "median": 2501.67,
+        "min": 1519.49,
+        "max": 7558.28
+      }
+    },
+    "letter": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "m": 2,
+        "q": 15,
+        "r": 3
+      },
+      "latency_ms": {
+        "median": 2058.16,
+        "min": 1735.02,
+        "max": 7688.3
+      }
+    },
+    "number_1_100": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "37": 2,
+        "47": 7,
+        "57": 2,
+        "63": 2,
+        "67": 1,
+        "73": 6
+      },
+      "latency_ms": {
+        "median": 2019.62,
+        "min": 1626.96,
+        "max": 4539.57
+      }
+    },
+    "favorite_number": {
+      "attempts": 20,
+      "valid": 20,
+      "invalid": 0,
+      "counts": {
+        "17": 1,
+        "42": 2,
+        "7": 17
+      },
+      "latency_ms": {
+        "median": 1993.3,
+        "min": 1468.73,
+        "max": 4903.16
+      }
+    }
+  },
+  "total_attempts": 100,
+  "total_valid": 100,
+  "total_invalid": 0,
+  "metrics": {
+    "previous_day_jsd": 0.03774488029496952,
+    "baseline_jsd": 0.023255473121940855,
+    "cell_baseline_jsd": {
+      "number_1_10": 0.0,
+      "coin_flip": 0.0050246648329318536,
+      "letter": 0.02051020359534831,
+      "number_1_100": 0.047649114321662106,
+      "favorite_number": 0.043093382859762004
+    },
+    "status": "within observed range",
+    "threshold_99": 0.08699123320516648
+  }
+}
