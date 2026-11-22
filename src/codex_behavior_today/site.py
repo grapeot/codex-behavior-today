@@ -34,6 +34,7 @@ def _html(model: str = DEFAULT_MODEL) -> str:
 <main class="wrap">
 <header class="hero"><div><p class="eyebrow">Daily endpoint behavior monitor</p><h1>Did Codex behave differently today?</h1></div><p class="lede">Thirty days of fixed, short probes through one Codex subscription path. The charts show observed endpoint behavior, not model identity or general capability.</p></header>
 <div id="summary" class="summary"></div>
+<aside class="model-warning" role="note"><strong>Project concluded on 2026-11-22</strong><p>Daily sampling has stopped and this dashboard is an archive. The alert status shown here is not reliable: the threshold only ratcheted upward and missed two within-model shifts. See the <a href="https://github.com/grapeot/codex-behavior-today/blob/master/docs/retrospective.md">retrospective</a> (in Chinese) for the findings and the reasons for stopping.</p></aside>
 <aside id="model-warning" class="model-warning" role="status" hidden></aside>
 <section><div class="section-head"><h2>Thirty-day behavior trend</h2><p class="section-note">Each bar is one day's answer distribution. Select a day to inspect its recorded counts.</p></div><div id="trends" class="trend-grid"></div></section>
 <section class="details"><div class="section-head"><h2>Selected day</h2><p id="selected-note" class="section-note">Choose a day from any chart.</p></div><div id="selected" class="detail-grid"></div></section>

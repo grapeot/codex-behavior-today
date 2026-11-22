@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### 2026-11-22
+
+- Concluded the project and stopped the owner-side daily schedule. Added `docs/retrospective.md` with the four-month findings: two significant within-model shifts (gpt-5.6-sol in early September, gpt-6.1-sol from mid-October) that the dashboard did not keep flagging, and the reasons for stopping.
+- Added a concluded notice to the README and the dashboard. Metrics code and historical aggregates are unchanged.
+
 ### 2026-10-03
 
 - Switched the default monitoring target to `gpt-6.1-sol` and added a transition warning for visible cross-model history, retaining the fixed probes and existing baseline calculations.
@@ -26,6 +31,8 @@
 
 ## Lessons Learned
 
+- A percentile threshold over all history ratchets upward after every large event, including self-initiated model switches; combined with a rolling baseline it hides gradual within-model drift. Baselines and thresholds should be per model, with a fixed reference window, and failed days must be reported as failed.
+- A drift signal without a paired quality signal cannot be acted on; decide what action a reading would trigger before running a monitor for months.
 - Treat cross-model transitions distinctly from within-model behavioral drift, and serialize unavailable numeric metrics as explicit nulls for strict JSON validity.
 
 - The dashboard monitors a subscription endpoint behavior envelope, not a model identity.
