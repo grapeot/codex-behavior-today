@@ -4,6 +4,12 @@ Codex Behavior Today is a small public dashboard answering one narrow question: 
 
 It does not identify model weights, prove model substitution, or measure general model capability. A notable shift means only that this endpoint's sampled answer distribution changed enough to merit a closer look.
 
+## Status: Concluded (2026-11-22)
+
+Daily sampling ended on 2026-11-22 after 121 days of data across `gpt-5.6-sol`, `gpt-6.1-sol`, and `gpt-6.2-sol`. The experiment answered one half of its original question: these fixed short prompts do pick up statistically significant within-model shifts in answer distributions. Without a paired quality signal, however, those shifts cannot tell whether coding performance actually changed. Our alert logic (a 99th-percentile threshold over all history plus a 14-day rolling baseline) also grew insensitive over time, missed both within-model shifts after their first days, and labeled failed days as normal.
+
+The aggregate data under `data/daily/` and the static dashboard remain as an archive and can still be rebuilt offline via `build-site`. Raw responses were never published. For the full numbers, methodology caveats, and the reasons for stopping, see [docs/retrospective.md](docs/retrospective.md) (in Chinese). The instructions below describe how the project ran and are kept for reproducibility.
+
 ## How It Works
 
 Each daily run collects 100 short answers across five fixed prompt cells. The local runner retains raw answers in a private SQLite database, then publishes only aggregate counts, latency summaries, and distribution-distance metrics. The committed `site/` directory is deployed as GitHub Pages.

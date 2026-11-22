@@ -1,5 +1,7 @@
 # Codex Behavior Today
 
+Status: concluded on 2026-11-22. The daily schedule is stopped; see `docs/retrospective.md`. Do not restart sampling without explicit user authorization.
+
 This public repository monitors whether a fixed Codex endpoint's observed behavior has changed relative to its own history. It is not a model identity verifier or a capability benchmark.
 
 ## Structure
